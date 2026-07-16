@@ -1,0 +1,25 @@
+.DS_Store
+**/__pycache__/
+**/*.py[cod]
+**/venv/
+**/node_modules/
+**/.next/
+**/build/
+**/build_new/
+**/build_venv/
+**/dist/
+**/dist_new/
+**/installer_output/
+**/.pio/
+
+# Local configuration and secrets
+**/.env
+**/.env.*
+!**/.env.example
+**/deployment.json
+**/*.db
+**/*.db-shm
+**/*.db-wal
+
+# Legacy PyInstaller workspace kept locally by the website project
+products/brelock/apps/website/breLock/

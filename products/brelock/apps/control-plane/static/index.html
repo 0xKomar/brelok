@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>breLock Control</title>
+  <style>
+    :root{--bg:#07110d;--surface:#0d1c16;--surface2:#12261d;--border:#203d30;--green:#37d67a;--text:#f2f7f4;--muted:#8fa99c;--blue:#5aa7ff;--warn:#f5b942;--red:#ff6577}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:14px Inter,ui-sans-serif,system-ui,-apple-system,sans-serif;min-height:100vh}
+    button,input,select{font:inherit}.shell{max-width:1440px;margin:auto;padding:28px}.topbar{display:flex;align-items:center;gap:14px;margin-bottom:28px}.logo{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--green);color:var(--bg);font-size:22px;font-weight:900}.brand h1{font-size:20px;margin:0}.brand p{color:var(--muted);margin:3px 0 0}.spacer{flex:1}.user{text-align:right}.user strong,.user span{display:block}.user span{color:var(--muted);font-size:12px}
+    .button{border:0;border-radius:10px;padding:10px 14px;font-weight:750;cursor:pointer;background:var(--green);color:var(--bg)}.button:hover{filter:brightness(.92)}.button.secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}.button.danger{background:#3a1820;color:var(--red)}.button.small{padding:7px 10px;font-size:12px}.button:disabled{opacity:.45;cursor:not-allowed}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}.stat,.panel,.laptop{background:var(--surface);border:1px solid var(--border);border-radius:16px}.stat{padding:18px}.stat span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em}.stat strong{display:block;font-size:28px;margin-top:8px}.stat strong.green{color:var(--green)}
+    .layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(300px,1fr);gap:18px}.panel{padding:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.panel h2{font-size:16px;margin:0}.panel-sub{color:var(--muted);font-size:12px;margin-top:4px}.laptops{display:grid;gap:12px}.laptop{padding:16px;background:var(--surface2)}.laptop-top{display:flex;align-items:flex-start;gap:10px}.device-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;background:#183528;color:var(--green);font-weight:900}.device-main{min-width:0;flex:1}.device-main h3{margin:0 0 3px;font-size:14px}.device-main p{margin:0;color:var(--muted);font-size:11px}.badge{border-radius:999px;padding:5px 8px;font-size:10px;font-weight:800;background:#182c24;color:var(--muted)}.badge.online{color:var(--green);background:#123321}.badge.assigned{color:var(--blue);background:#132942}.badge.offline{color:var(--red);background:#351820}
+    .assignment{display:flex;gap:8px;margin-top:14px}.assignment select{flex:1}.settings{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}.field label{display:block;color:var(--muted);font-size:10px;margin:0 0 5px}.field input,.field select,.assignment select,.manual input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:9px;color:var(--text);padding:8px;outline:none}.field input:focus,.assignment select:focus,.manual input:focus{border-color:var(--green)}.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}.diagnostics{margin-top:12px;padding:11px;background:var(--bg);border:1px solid var(--border);border-radius:11px}.diag-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.diag-head strong{font-size:11px}.diag-head span{font:11px ui-monospace,SFMono-Regular,monospace;color:var(--blue)}.chart{display:block;width:100%;height:72px}.chart-grid{stroke:#203d30;stroke-width:1}.chart-line{fill:none;stroke:var(--green);stroke-width:2;vector-effect:non-scaling-stroke}
+    .brelocks{display:grid;gap:8px}.brelock{display:flex;align-items:center;gap:10px;padding:11px;background:var(--surface2);border-radius:11px}.dot{width:9px;height:9px;border-radius:50%;background:var(--muted)}.dot.fresh{background:var(--green);box-shadow:0 0 12px #37d67a77}.brelock-main{flex:1;min-width:0}.brelock-main strong,.brelock-main span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brelock-main span{font:10px ui-monospace,SFMono-Regular,monospace;color:var(--muted);margin-top:3px}.rssi{font:11px ui-monospace,SFMono-Regular,monospace;color:var(--blue)}.manual{display:grid;grid-template-columns:1fr 1fr auto;gap:7px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+    .empty{text-align:center;color:var(--muted);padding:38px 12px;border:1px dashed var(--border);border-radius:12px}.login{position:fixed;inset:0;background:radial-gradient(circle at 50% 10%,#123522 0,var(--bg) 45%);display:grid;place-items:center;z-index:10}.login.hidden,.app.hidden{display:none}.login-card{width:min(420px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:28px;box-shadow:0 30px 80px #0008}.login-mark{width:54px;height:54px;border-radius:16px;background:var(--green);color:var(--bg);display:grid;place-items:center;font-size:26px;font-weight:900;margin-bottom:22px}.login h1{font-size:24px;margin:0}.login p{color:var(--muted);line-height:1.5}.login label{display:block;color:var(--muted);font-size:11px;margin:14px 0 6px}.login input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:11px;color:var(--text);padding:12px;outline:none}.login .button{width:100%;margin-top:18px;padding:13px}.error{color:var(--red);min-height:18px;font-size:12px;margin-top:10px}.toast{position:fixed;right:24px;bottom:24px;background:var(--text);color:var(--bg);padding:12px 16px;border-radius:11px;font-weight:700;box-shadow:0 12px 35px #0008;opacity:0;transform:translateY(15px);pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:none}
+    @media(max-width:950px){.layout{grid-template-columns:1fr}.settings{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.shell{padding:16px}.user{display:none}.stats{grid-template-columns:1fr 1fr}.settings,.manual{grid-template-columns:1fr}.assignment{flex-wrap:wrap}.assignment select{min-width:100%}}
+  </style>
+</head>
+<body>
+  <section id="login" class="login">
+    <form id="loginForm" class="login-card">
+      <div class="login-mark">B</div><h1>breLock Control</h1>
+      <p>Zaloguj się, aby zarządzać laptopami i brelokami swojej firmy.</p>
+      <label for="email">EMAIL ADMINISTRATORA</label><input id="email" type="email" value="admin@example.com" required autocomplete="username">
+      <label for="password">HASŁO</label><input id="password" type="password" required autocomplete="current-password">
+      <div id="loginError" class="error"></div><button class="button" type="submit">Zaloguj się</button>
+    </form>
+  </section>
+
+  <main id="app" class="app hidden"><div class="shell">
+    <header class="topbar"><div class="logo">B</div><div class="brand"><h1>breLock Control</h1><p id="companyName">—</p></div><div class="spacer"></div>
+      <div class="user"><strong id="adminEmail">—</strong><span>Administrator firmy</span></div>
+      <button class="button secondary small" onclick="loadOverview()">Odśwież</button><button class="button secondary small" onclick="logout()">Wyloguj</button>
+    </header>
+    <section class="stats"><div class="stat"><span>Laptopy</span><strong id="statLaptops">0</strong></div><div class="stat"><span>Online</span><strong id="statOnline" class="green">0</strong></div><div class="stat"><span>breLocki</span><strong id="statBrelocks">0</strong></div><div class="stat"><span>Przypisane</span><strong id="statAssigned">0</strong></div></section>
+    <section class="layout">
+      <div class="panel"><div class="panel-head"><div><h2>Laptopy pracowników</h2><div class="panel-sub">Konfiguracja jest automatycznie pobierana przez aplikację.</div></div></div><div id="laptops" class="laptops"></div></div>
+      <aside class="panel"><div class="panel-head"><div><h2>breLocki w firmie</h2><div class="panel-sub">Wykryte automatycznie lub dodane ręcznie.</div></div></div><div id="brelocks" class="brelocks"></div>
+        <form id="manualForm" class="manual"><input id="manualId" placeholder="ID: 12 znaków HEX" maxlength="17" required><input id="manualName" placeholder="Nazwa opcjonalna"><button class="button small">Dodaj</button></form>
+      </aside>
+    </section>
+  </div></main><div id="toast" class="toast"></div>
+  <script>
+    let state={admin:null,laptops:[],brelocks:[],telemetry:{}};
+    let draftAssignments={};
+    let overviewLoading=false;
+    const $=id=>document.getElementById(id);
+    const esc=value=>String(value??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    const online=date=>Date.now()-new Date(date).getTime()<45000;
+    const fresh=date=>Date.now()-new Date(date).getTime()<60000;
+    function toast(message){$('toast').textContent=message;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
+    async function api(path,options={}){const response=await fetch(path,{credentials:'same-origin',headers:{'Content-Type':'application/json',...(options.headers||{})},...options});if(response.status===401){showLogin();throw new Error('Sesja wygasła')}if(!response.ok){let error={};try{error=await response.json()}catch{}throw new Error(error.detail||`HTTP ${response.status}`)}return response.status===204?null:response.json()}
+    function showLogin(){$('login').classList.remove('hidden');$('app').classList.add('hidden')}
+    function showApp(){$('login').classList.add('hidden');$('app').classList.remove('hidden')}
+    async function bootstrap(){try{state.admin=await api('/api/admin/me');showApp();await loadOverview()}catch{showLogin()}}
+    $('loginForm').addEventListener('submit',async event=>{event.preventDefault();$('loginError').textContent='';try{state.admin=await api('/api/admin/login',{method:'POST',body:JSON.stringify({email:$('email').value,password:$('password').value})});showApp();await loadOverview()}catch(error){$('loginError').textContent=error.message}});
+    async function logout(){await api('/api/admin/logout',{method:'POST'}).catch(()=>{});state={admin:null,laptops:[],brelocks:[],telemetry:{}};draftAssignments={};showLogin()}
+    async function loadOverview(){if(overviewLoading)return;overviewLoading=true;try{const data=await api('/api/admin/overview');state={...state,...data};render()}finally{overviewLoading=false}}
+    function render(){
+      $('companyName').textContent=state.admin.company_name;$('adminEmail').textContent=state.admin.email;
+      $('statLaptops').textContent=state.laptops.length;$('statOnline').textContent=state.laptops.filter(item=>online(item.last_seen)).length;
+      $('statBrelocks').textContent=state.brelocks.length;$('statAssigned').textContent=state.laptops.filter(item=>item.brelock_id).length;
+      $('laptops').innerHTML=state.laptops.length?state.laptops.map(renderLaptop).join(''):'<div class="empty">Brak laptopów.<br>Uruchom aplikację pracownika z kodem firmy.</div>';
+      $('brelocks').innerHTML=state.brelocks.length?state.brelocks.map(renderBrelock).join(''):'<div class="empty">Brak breLocków w zasięgu.</div>';
+    }
+    function renderLaptop(laptop){
+      const isOnline=online(laptop.last_seen),assigned=Boolean(laptop.brelock_id);
+      const available=state.brelocks.filter(item=>!item.laptop_id||item.id===laptop.brelock_id);
+      const selectedId=Object.prototype.hasOwnProperty.call(draftAssignments,laptop.id)?draftAssignments[laptop.id]:(laptop.brelock_id||'');
+      const options='<option value="">Wybierz breLock…</option>'+available.map(item=>`<option value="${esc(item.id)}" ${item.id===selectedId?'selected':''}>${esc(item.display_name)} · ${esc(item.id.slice(-6))}</option>`).join('');
+      const samples=state.telemetry[laptop.id]||[];
+      const current=samples.length?samples[samples.length-1].rssi:null;
+      const distance=current==null?null:Math.pow(10,(laptop.reference_rssi-current)/22);
+      const points=samples.map((sample,index)=>`${samples.length===1?100:index*200/(samples.length-1)},${70-Math.max(0,Math.min(70,(sample.rssi+100)*70/65))}`).join(' ');
+      const diagnostics=assigned?`<div class="diagnostics"><div class="diag-head"><strong>SYGNAŁ NA ŻYWO</strong><span>${current==null?'czekam na dane':`${current} dBm · ~${distance<1?Math.round(distance*100)+' cm':distance.toFixed(1)+' m'}`}</span></div><svg class="chart" viewBox="0 0 200 72" preserveAspectRatio="none"><line class="chart-grid" x1="0" y1="35" x2="200" y2="35"></line><polyline class="chart-line" points="${points}"></polyline></svg></div>`:'';
+      const settings=assigned?`<div class="settings">
+        <div class="field"><label>OCHRONA</label><select id="enabled-${laptop.id}"><option value="1" ${laptop.enabled?'selected':''}>Włączona</option><option value="0" ${!laptop.enabled?'selected':''}>Wyłączona</option></select></div>
+        <div class="field"><label>PRÓG RSSI</label><input id="threshold-${laptop.id}" type="number" min="-100" max="-35" value="${laptop.rssi_threshold}"></div>
+        <div class="field"><label>TREND / CZAS (S)</label><input id="reaction-${laptop.id}" type="number" min="1" max="30" step="0.5" value="${laptop.reaction_seconds}"></div>
+        <div class="field"><label>RSSI @ 1 M</label><input id="reference-${laptop.id}" type="number" min="-90" max="-35" value="${laptop.reference_rssi}"></div>
+        <div class="field"><label>WATCHDOG (S)</label><input id="watchdog-${laptop.id}" type="number" min="2" max="60" step="0.5" value="${laptop.watchdog_seconds}"></div>
+      </div><div class="actions"><button class="button danger small" onclick="unassign('${laptop.id}')">Odłącz</button><button class="button small" onclick="saveSettings('${laptop.id}')">Zapisz politykę</button></div>`:'';
+      return `<article class="laptop"><div class="laptop-top"><div class="device-icon">▣</div><div class="device-main"><h3>${esc(laptop.hostname)}</h3><p>${esc(laptop.platform)} · aplikacja ${esc(laptop.app_version)} · ${esc(laptop.id.slice(0,8))}</p></div><span class="badge ${isOnline?'online':'offline'}">${isOnline?'● ONLINE':'● OFFLINE'}</span>${assigned?'<span class="badge assigned">PRZYPISANY</span>':''}</div>
+      <div class="assignment"><select id="assign-${laptop.id}" onchange="rememberAssignment('${laptop.id}',this.value)">${options}</select><button class="button secondary small" onclick="assign('${laptop.id}',this)">${assigned?'Zmień breLock':'Przypisz'}</button></div>${diagnostics}${settings}</article>`;
+    }
+    function renderBrelock(item){return `<div class="brelock"><span class="dot ${fresh(item.last_seen)?'fresh':''}"></span><div class="brelock-main"><strong>${esc(item.display_name)}</strong><span>${esc(item.id)}${item.laptop_id?' · przypisany':''}</span></div><span class="rssi">${item.last_rssi==null?'—':item.last_rssi+' dBm'}</span></div>`}
+    function rememberAssignment(laptopId,brelockId){draftAssignments[laptopId]=brelockId}
+    async function assign(laptopId,button){const select=$(`assign-${laptopId}`);const brelockId=draftAssignments[laptopId]??select?.value;if(!brelockId)return toast('Najpierw wybierz breLock z listy');button.disabled=true;const oldText=button.textContent;button.textContent='Przypisuję…';try{await api('/api/admin/assign',{method:'POST',body:JSON.stringify({laptop_id:laptopId,brelock_id:brelockId})});delete draftAssignments[laptopId];toast('breLock został przypisany');await loadOverview()}catch(error){toast(error.message);button.disabled=false;button.textContent=oldText}}
+    async function unassign(laptopId){await api(`/api/admin/laptops/${encodeURIComponent(laptopId)}/assignment`,{method:'DELETE'});toast('Przypisanie usunięte');await loadOverview()}
+    async function saveSettings(id){const body={enabled:$(`enabled-${id}`).value==='1',rssi_threshold:Number($(`threshold-${id}`).value),reaction_seconds:Number($(`reaction-${id}`).value),reference_rssi:Number($(`reference-${id}`).value),watchdog_seconds:Number($(`watchdog-${id}`).value)};await api(`/api/admin/laptops/${encodeURIComponent(id)}/settings`,{method:'PUT',body:JSON.stringify(body)});toast('Polityka zapisana');await loadOverview()}
+    $('manualForm').addEventListener('submit',async event=>{event.preventDefault();try{await api('/api/admin/brelocks',{method:'POST',body:JSON.stringify({brelock_id:$('manualId').value,display_name:$('manualName').value})});$('manualId').value='';$('manualName').value='';toast('breLock dodany');await loadOverview()}catch(error){toast(error.message)}});
+    bootstrap();setInterval(()=>{const editing=['INPUT','SELECT'].includes(document.activeElement?.tagName);if(state.admin&&!editing)loadOverview().catch(error=>toast(error.message))},2000);
+  </script>
+</body>
+</html>

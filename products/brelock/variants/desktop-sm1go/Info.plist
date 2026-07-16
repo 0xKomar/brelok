@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>breLock potrzebuje dostępu do Bluetooth, aby wykrywać urządzenia BLE w pobliżu i automatycznie blokować/odblokowywać komputer.</string>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>breLock potrzebuje dostępu do Bluetooth, aby komunikować się z urządzeniem ESP32.</string>
+</dict>
+</plist>

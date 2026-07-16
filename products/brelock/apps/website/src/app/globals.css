@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brelock-darkest: #010a05; 
+  --color-brelock-darker: #02140a;
+  --color-brelock-dark: #042413;
+  --color-brelock-primary: #0b4526;
+  --color-brelock-light: #188248;
+  --color-brelock-glow: #2ecc71;
+}
+
+:root {
+  --background: var(--color-brelock-darkest);
+  --foreground: #ffffff;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@utility glass {
+  background: rgba(4, 36, 19, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@utility glass-border {
+  border: 1px solid rgba(24, 130, 72, 0.3);
+}
+
+@utility perspective {
+  perspective: 1000px;
+}
+@utility preserve-3d {
+  transform-style: preserve-3d;
+}
+@utility backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+@utility rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@utility animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@utility animate-float-delayed {
+  animation: float 7s ease-in-out infinite reverse;
+}

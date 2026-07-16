@@ -1,0 +1,5 @@
+{
+  "control_url": "http://127.0.0.1:8100",
+  "company_slug": "demo",
+  "enrollment_token": "replace-with-company-enrollment-token"
+}

@@ -1,0 +1,12 @@
+
+venv/
+__pycache__/
+
+__pycache__/
+*.pyc
+venv/
+build/
+build_new/
+installer_output/
+build_tmp/
+dist/
