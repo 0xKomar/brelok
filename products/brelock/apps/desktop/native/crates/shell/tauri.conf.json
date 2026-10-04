@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "breLock",
+  "version": "0.1.0",
+  "identifier": "dev.brelock.desktop",
+  "mainBinaryName": "brelock",
+  "build": {
+    "beforeDevCommand": { "script": "npm run dev", "cwd": "../../ui" },
+    "beforeBuildCommand": { "script": "npm run build", "cwd": "../../ui" },
+    "devUrl": "http://127.0.0.1:1420",
+    "frontendDist": "../../ui/dist"
+  },
+  "app": {
+    "windows": [{ "label": "main", "title": "breLock", "width": 380, "height": 520, "minWidth": 340, "minHeight": 440, "maximizable": false, "center": true, "visible": false, "backgroundColor": "#0c1525" }],
+    "security": { "csp": "default-src 'self'; connect-src ipc: http://ipc.localhost; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'" }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["app", "nsis"],
+    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"],
+    "macOS": { "minimumSystemVersion": "12.0", "infoPlist": "Info.plist", "signingIdentity": "-" }
+  }
+}

@@ -1,0 +1,25 @@
+[package]
+name = "brelock-shell"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+default-run = "brelock"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+uuid.workspace = true
+anyhow.workspace = true
+brelock-core.workspace = true
+brelock-platform.workspace = true
+brelock-desktop = { path = "../app" }
+serde.workspace = true
+tokio.workspace = true
+tauri = { version = "2", features = ["tray-icon", "image-png"] }
+tauri-plugin-single-instance = "2"
+
+[[bin]]
+name = "brelock"
+path = "src/main.rs"

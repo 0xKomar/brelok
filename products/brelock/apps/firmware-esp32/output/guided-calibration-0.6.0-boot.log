@@ -1,0 +1,14 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x18 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce3808,len:0x4bc
+load:0x403c9700,len:0xbd8
+load:0x403cc700,len:0x2a0c
+entry 0x403c98d0
+[  1280][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+[IMU] ready=1 address=0x6B who=0x05 revision=0x7C acc=4g gyro=512dps odr=62.5Hz
+[BOOT] breLock=0.6.0-poc board=Waveshare-S3-Touch id=142D6F020F3C boot=8956 flash=16777216 psram=2095055 ble_init=1
+[BLE] v3 telemetry + GATT control; primary=31B scan_response=27B interval=100ms tx=+3dBm service=9e20a100-6f7f-4d8a-9c21-4b52454c4f43; USB: r=raw CSV, s=status, w=wake
+[LCD] dc=8 cs=9 rst=14 sclk=10 mosi=11 bl=2 touch_ready=1 touch_id=0xB5 auto_sleep_ms=60000

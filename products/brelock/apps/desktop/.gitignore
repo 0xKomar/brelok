@@ -10,3 +10,4 @@ build_new/
 installer_output/
 build_tmp/
 dist/
+logs/

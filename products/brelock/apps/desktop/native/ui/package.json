@@ -1,0 +1,29 @@
+{
+  "name": "brelock-ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "build": "npm run check && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "vitest run",
+    "desktop:dev": "cd ../crates/shell && tauri dev",
+    "desktop:build": "cd ../crates/shell && tauri build"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2",
+    "svelte": "^5"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7",
+    "@tauri-apps/cli": "^2",
+    "@tsconfig/svelte": "^5",
+    "@types/node": "^25",
+    "svelte-check": "^4",
+    "typescript": "^6",
+    "vite": "^8",
+    "vitest": "^4"
+  }
+}

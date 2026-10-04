@@ -1,0 +1,21 @@
+Generation tool: built-in image_gen.imagegen
+Final PNG dimensions: 2172 x 724 px (3:1)
+Product depiction: conceptual prototype visualization
+
+Final prompt:
+Use case: ads-marketing.
+Asset type: finished horizontal project banner for breLock, usable as a presentation header and project cover. Create a single polished raster banner with a 3:1 aspect ratio, ideally 2400 x 800 pixels.
+Primary request: communicate a Polish prototype project in which a small wearable Bluetooth LE key fob and a local desktop app detect departure and automatically lock the computer. The current product design is deep navy and soft mint.
+Scene/backdrop: near-black navy #0c1525, a subtle radial light behind the hardware, fine restrained concentric radio-wave linework restricted to the hardware area. Premium technology product campaign, quiet and clean.
+Subject: on the right half a realistic silver unbranded open laptop in a three-quarter view, screen showing only a single simple closed padlock in soft mint on a dark navy screen; in front of it a small round graphite key fob concept with a round black display, a simple mint power symbol, a short metal key ring and one key. A restrained mint signal arc visually connects fob and laptop. Natural product scale, the fob is pocket-size, much smaller than the laptop.
+Style/medium: crisp art-directed 3D product visualization with realistic materials, precise clean graphic typography, professional industrial design, controlled studio lighting. Beautiful restrained depth, not a UI screenshot.
+Composition/framing: wide 3:1 banner. Left approximately 48 percent is a clear text area; right approximately 52 percent is the product scene. Keep all copy at least 6 percent from the canvas edges. Every text line comfortably fits and never overlaps hardware. Wordmark at upper left, large two-line headline below it, short supporting line below. Strong readable visual hierarchy, extensive negative space, simple elegant design.
+Color palette: deep navy #0c1525 and #121f33, mint #67d8ac, white #e3eaf5, muted blue-gray #8e9fb8. Soft mint rim lighting on the products. Avoid saturated green cyberpunk.
+Text (verbatim, only these four text elements):
+"breLock" — a clean large wordmark, preserve capitalization exactly, bre in off-white and Lock in mint, no added logo icon.
+"Bezpieczeństwo" — first headline line, large bold off-white geometric sans-serif.
+"działa z automatu." — second headline line, equally large, in mint.
+"Brelok + aplikacja. Automatyczna blokada komputera." — small readable supporting line in muted pale blue-gray.
+"PROTOTYP" — tiny understated label at lower left, generously letter spaced.
+Constraints: flawless Polish spelling and diacritics including ń and ł, verbatim text, no other text, no extra brands, no Apple or Windows logo, no QR codes, no website addresses, no call-to-action button, no people, no watermark, no borders, no random technical labels, no dense dashboard, no exaggerated sci-fi effects. The object is a conceptual prototype visualization, not a literal photograph of a finished commercial device. Render the entire banner as one finished image, not a mockup on a wall or screen.
+

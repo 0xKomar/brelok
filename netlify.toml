@@ -1,0 +1,7 @@
+[build]
+  base = "products/brelock/apps/website"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "24"

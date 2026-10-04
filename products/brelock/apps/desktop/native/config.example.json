@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "device_id": null,
+  "reference_rssi_dbm": -59.0,
+  "path_loss_exponent": 2.2,
+  "departure_threshold_dbm": null,
+  "fresh_seconds": 1.5,
+  "lost_seconds": 6.0,
+  "refresh_hz": 5.0
+}

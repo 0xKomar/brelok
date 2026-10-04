@@ -1,0 +1,6 @@
+{
+  "identifier": "main",
+  "description": "Local desktop window and event subscription.",
+  "windows": ["main"],
+  "permissions": ["core:default"]
+}

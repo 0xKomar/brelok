@@ -1,147 +1,65 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
-import { Lock, Unlock } from "lucide-react";
+
+import { useEffect, useRef, useState } from "react";
+import { Coffee, KeyRound, LockKeyhole } from "lucide-react";
+import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
+import { Reveal } from "./MotionPrimitives";
 
 export default function InteractiveLaptop() {
-  const [isInside, setIsInside] = useState(false);
-  const [isLocked, setIsLocked] = useState(false);
-  const laptopRef = useRef<HTMLDivElement>(null);
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const laptopCenterRef = useRef<{x: number, y: number} | null>(null);
+  const [distance, setDistance] = useState(24);
+  const [trackWidth, setTrackWidth] = useState(280);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { margin: "100px" });
+  const reduced = useReducedMotion();
+  const isAway = distance >= 68;
 
   useEffect(() => {
-    const updateCenter = () => {
-      if (laptopRef.current) {
-        const rect = laptopRef.current.getBoundingClientRect();
-        laptopCenterRef.current = {
-            x: rect.left + rect.width / 2,
-            y: rect.top + rect.height / 2,
-        };
-      }
-    };
-    
-    // Initial and deferred calculations
-    updateCenter();
-    // In case fonts/images load late
-    const timeoutId = setTimeout(updateCenter, 500);
-    
-    window.addEventListener('resize', updateCenter);
-    window.addEventListener('scroll', updateCenter, { passive: true });
-    
-    return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener('resize', updateCenter);
-      window.removeEventListener('scroll', updateCenter);
-    };
+    const track = trackRef.current;
+    if (!track) return;
+    const observer = new ResizeObserver(([entry]) => setTrackWidth(entry.contentRect.width));
+    observer.observe(track);
+    return () => observer.disconnect();
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    // Direct DOM manipulation for zero-lag cursor tracking via GPU transform
-    if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
-    }
-
-    if (laptopCenterRef.current) {
-        const center = laptopCenterRef.current;
-        const dist = Math.sqrt(
-            Math.pow(e.clientX - center.x, 2) + Math.pow(e.clientY - center.y, 2)
-        );
-        
-        // Prevent React re-rendering 60 times a second
-        // Only update state if the lock status actually crosses the threshold
-        const newLockState = dist > 350;
-        if (newLockState !== isLocked) {
-            setIsLocked(newLockState);
-        }
-    }
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLElement>) => {
-    if (e.touches.length > 0) {
-        const touch = e.touches[0];
-        if (cursorRef.current) {
-            cursorRef.current.style.transform = `translate3d(${touch.clientX}px, ${touch.clientY}px, 0) translate(-50%, -50%)`;
-        }
-
-        if (laptopCenterRef.current) {
-            const center = laptopCenterRef.current;
-            const dist = Math.sqrt(
-                Math.pow(touch.clientX - center.x, 2) + Math.pow(touch.clientY - center.y, 2)
-            );
-            
-            // Smaller threshold for mobile screens
-            const threshold = typeof window !== 'undefined' && window.innerWidth < 640 ? 150 : 350;
-            const newLockState = dist > threshold;
-            if (newLockState !== isLocked) {
-                setIsLocked(newLockState);
-            }
-        }
-    }
-  };
-
   return (
-    <section 
-      className="w-full relative py-32 bg-[#021008] overflow-hidden border-t border-white/5 md:cursor-none"
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsInside(true)}
-      onMouseLeave={() => setIsInside(false)}
-      onTouchMove={handleTouchMove}
-      onTouchStart={(e) => { setIsInside(true); handleTouchMove(e); }}
-      onTouchEnd={() => setIsInside(false)}
-    >
-      <div className="max-w-6xl mx-auto px-6 flex flex-col items-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center tracking-tight">
-          Przetestuj na własnej skórze.
-        </h2>
-        <p className="text-white/60 text-center max-w-2xl text-lg mb-20 pointer-events-none">
-          Twój kursor (lub palec na urządzeniach mobilnych) zachowuje się teraz jak urządzenie breLock. Spróbuj "odejść" nim powoli od komputera, żeby na własne oczy przekonać się o bezlitosnej blokadzie ekranu.
-        </p>
-        
-        {/* Laptop Container */}
-        <div className="relative mb-20 perspective">
-            <div 
-            ref={laptopRef}
-            className="relative w-[320px] sm:w-[500px] h-[200px] sm:h-[320px] bg-black rounded-t-2xl sm:rounded-t-3xl border-4 sm:border-[8px] border-gray-800 shadow-[0_0_50px_rgba(0,0,0,1)] flex items-center justify-center transition-all duration-300 z-10 pointer-events-none"
-            >
-                <div className="absolute inset-0 bg-[#042413] flex flex-col items-center justify-center overflow-hidden rounded-t-xl sm:rounded-t-2xl transition-colors duration-500">
-                    {isLocked ? (
-                    <div className="flex flex-col items-center justify-center w-full h-full bg-red-950/40 transition-opacity duration-300">
-                        <div className="absolute inset-0 bg-red-500/10 blur-xl animate-pulse" />
-                        <Lock size={80} className="mb-4 text-red-500 animate-pulse drop-shadow-[0_0_15px_rgba(239,68,68,0.8)]" />
-                        <span className="text-2xl sm:text-4xl font-bold tracking-widest text-red-500/90 [text-shadow:_0_2px_10px_rgba(239,68,68,0.5)]">ZABLOKOWANE</span>
-                        <span className="text-sm text-red-500/60 mt-2 font-medium">Brak dostępu</span>
-                    </div>
-                    ) : (
-                    <div className="flex flex-col items-center justify-center w-full h-full bg-brelock-darker transition-opacity duration-300">
-                        <div className="absolute inset-0 bg-brelock-glow/10 blur-xl animate-pulse" />
-                        <Unlock size={80} className="mb-4 text-brelock-glow drop-shadow-[0_0_15px_rgba(46,204,113,0.8)]" />
-                        <span className="text-2xl sm:text-4xl font-bold tracking-widest text-white [text-shadow:_0_2px_10px_rgba(255,255,255,0.3)]">AKTYWNY</span>
-                        <span className="text-sm text-white/50 mt-2 font-medium">Praca w toku...</span>
-                    </div>
-                    )}
-                </div>
-            
-                {/* Keyboard base */}
-                <div className="absolute -bottom-12 sm:-bottom-16 -left-[10%] w-[120%] h-12 sm:h-16 bg-gray-800 rounded-b-2xl shadow-2xl flex justify-center [transform:rotateX(45deg)] z-0">
-                    <div className="w-20 h-2 sm:h-3 bg-gray-600 rounded-full mt-2 sm:mt-3 opacity-50"></div>
-                </div>
+    <section id="demo" ref={sectionRef} className="demo-section" aria-labelledby="demo-title">
+      <div className="demo-inner site-container">
+        <Reveal className="section-center"><p className="eyebrow">POBAW SIĘ POMYSŁEM</p><h2 id="demo-title" className="display-heading">Idziesz po kawę?<br /><em>Przesuń brelok.</em></h2><p className="demo-intro">Oddal go od komputera i zobacz docelową reakcję.</p></Reveal>
+        <Reveal className="simulation-stage" delay={0.15}>
+          <div className="simulation-illustration" aria-hidden="true">
+            <div className="laptop-illustration">
+              <div className="laptop-display">
+                <span className="laptop-camera" />
+                <motion.div className="laptop-screen" animate={{ backgroundColor: isAway ? "#15263b" : "#25473d" }}>
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div className="screen-state" key={isAway ? "away" : "near"} initial={reduced ? false : { opacity: 0, y: 15, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -10, scale: 0.95 }} transition={{ duration: reduced ? 0 : 0.3 }}>
+                      {isAway ? <LockKeyhole size={44} strokeWidth={1.2} /> : <Coffee size={44} strokeWidth={1.2} />}
+                      <span>{isAway ? "Ekran zablokowany" : "Przy biurku"}</span>
+                    </motion.div>
+                  </AnimatePresence>
+                </motion.div>
+              </div>
+              <div className="laptop-base"><span /></div>
             </div>
-        </div>
-
+            <div className="signal-ripples">
+              {[0, 1, 2].map((index) => <motion.span key={index} initial={false} animate={inView && !isAway && !reduced ? { scale: [0.65, 1.5], opacity: [0.2, 0] } : { scale: 1, opacity: 0 }} transition={inView && !isAway && !reduced ? { duration: 3.6, delay: index * 1.2, repeat: Infinity, ease: "linear" } : { duration: 0.3 }} />)}
+            </div>
+            <div className="signal-track" ref={trackRef}>
+              <motion.div className="signal-connection" animate={{ opacity: isAway ? 0.13 : 0.6, scaleX: distance / 100 }} transition={{ duration: reduced ? 0 : 0.25 }} />
+              <motion.div className="moving-fob" animate={{ x: trackWidth * distance / 100, rotate: isAway ? 10 : -8 }} transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 170, damping: 26 }}>
+                <span className="fob-ring" /><div className="fob-body"><KeyRound size={25} strokeWidth={1.4} /><motion.span className="fob-led" animate={{ backgroundColor: isAway ? "#f08080" : "#67d8ac" }} /></div>
+              </motion.div>
+            </div>
+          </div>
+        </Reveal>
+        <Reveal className="demo-controls" delay={0.2}>
+          <div className="range-heading"><label htmlFor="demo-distance">Odległość breloka</label><span role="status" aria-live="polite"><i className={isAway ? "is-away" : ""} />{isAway ? "Poza strefą" : "W zasięgu"}</span></div>
+          <input id="demo-distance" className="distance-slider" type="range" min="0" max="100" step="1" value={distance} aria-label="Odległość breloka od komputera" aria-valuetext={isAway ? "Poza strefą, symulacja blokady ekranu" : "W zasięgu, komputer aktywny"} onChange={(event) => setDistance(Number(event.target.value))} />
+          <div className="range-ends"><span>Przy komputerze</span><span>Poza strefą</span></div>
+          <p className="demo-disclaimer">To symulacja. Rzeczywista blokada systemu jest kolejnym etapem projektu.</p>
+        </Reveal>
       </div>
-
-      {/* Custom Cursor */}
-       <div 
-           ref={cursorRef}
-           className={`fixed pointer-events-none z-50 left-0 top-0 ${isInside ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}
-           style={{ transform: 'translate3d(-100px, -100px, 0) translate(-50%, -50%)' }} // Initial off-screen
-       >
-           <div className="relative flex items-center justify-center">
-               <div className={`absolute inset-0 rounded-full blur-[20px] opacity-60 animate-pulse w-32 h-32 -m-8 transition-colors duration-500 ${isLocked ? 'bg-red-500' : 'bg-brelock-glow'}`}></div>
-               <Image src="/logo2.png" alt="brelock cursor" width={64} height={64} className={`relative z-10 drop-shadow-[0_0_20px_rgba(0,0,0,0.5)] transition-all duration-500 ${isLocked ? 'brightness-50 sepia hue-rotate-[-50deg] saturate-200' : ''}`} />
-           </div>
-       </div>
     </section>
   );
 }

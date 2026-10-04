@@ -11,6 +11,16 @@
 **/dist_new/
 **/installer_output/
 **/.pio/
+**/target/
+**/logs/
+**/.netlify/
+**/out/
+**/.pytest_cache/
+**/*.tsbuildinfo
+/output/
+
+# Local installer-building utility; public application downloads stay tracked.
+**/inno_setup.exe
 
 # Local configuration and secrets
 **/.env
