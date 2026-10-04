@@ -29,15 +29,15 @@ export function DownloadDock() {
   return (
     <motion.aside
       className="download-dock"
-      aria-label="Pobierz aplikację breLock"
+      aria-label="Aplikacja breLock"
       initial={reduced ? false : { y: 110, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 130, damping: 24, delay: reduced ? 0 : 1 }}
     >
       <motion.div whileHover={reduced ? undefined : { y: -3 }} whileTap={{ scale: 0.98 }}>
-        <Link href="/pobierz" className="dock-link">Pobierz breLock <ArrowDown size={18} strokeWidth={1.6} /></Link>
+        <Link href="/pobierz" className="dock-link">Poznaj breLock <ArrowDown size={18} strokeWidth={1.6} /></Link>
       </motion.div>
-      <p>macOS · Windows <span>—</span> wersja prototypowa</p>
+      <p>macOS · Windows <span>—</span> Coming soon</p>
     </motion.aside>
   );
 }

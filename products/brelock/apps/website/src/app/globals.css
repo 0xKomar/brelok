@@ -259,6 +259,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .download-row { display: flex; align-items: center; justify-content: space-between; gap: 25px; padding-block: 25px; border-bottom: 1px solid #d3dcd7; }
 .download-row h2 { font-family: var(--serif); font-size: 25px; font-weight: 400; letter-spacing: -.5px; }
 .download-row p { margin-top: 5px; color: #7d8b83; font-size: 10px; }
+.download-status { display: inline-flex; padding: 8px 12px; border-radius: 999px; background: #e5ebe6; color: #6a7a70; font-size: 12px; white-space: nowrap; }
 .quiet-link { display: inline-flex; align-items: center; gap: 10px; color: #1a5a42; font-size: 12px; }
 .quiet-link:hover { color: #358568; }
 .platform-note { margin-top: 20px; color: #89988e; font-size: 10px; }

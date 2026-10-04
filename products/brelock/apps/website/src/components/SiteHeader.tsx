@@ -13,7 +13,7 @@ export default function SiteHeader() {
         <nav aria-label="Nawigacja główna" className="header-navigation">
           <Link href="/#dzialanie" className="nav-how">Jak działa</Link>
           <Link href="/#demo">Demo</Link>
-          <Link href="/pobierz" className="download-link">Pobierz <ArrowUpRight size={14} /></Link>
+          <Link href="/pobierz" className="download-link">Aplikacja <ArrowUpRight size={14} /></Link>
         </nav>
       </motion.div>
     </header>

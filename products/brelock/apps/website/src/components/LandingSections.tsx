@@ -118,7 +118,7 @@ export function LocalFirst() {
 
 const questions = [
   { question: "Czy breLock już blokuje komputer?", answer: "Prototyp aplikacji obsługuje systemową blokadę po wykryciu odejścia z brelokiem. Ochronę uruchamiasz po wybraniu urządzenia, kalibracji i nadaniu uprawnień systemowych. Animacja na tej stronie ilustruje zasadę działania; rzeczywiste testy wymagają fizycznego sprzętu." },
-  { question: "Na jakich systemach powstaje aplikacja?", answer: "Projekt rozwijamy dla macOS i Windows. Na stronie pobierania znajdziesz dostępne pakiety prototypu." },
+  { question: "Na jakich systemach powstaje aplikacja?", answer: "Projekt rozwijamy dla macOS i Windows. Pakiety dla obu systemów udostępnimy wkrótce." },
   { question: "Czy potrzebuję konta lub internetu?", answer: "Do lokalnego działania nie potrzebujesz konta ani serwera. Brelok komunikuje się z aplikacją przez Bluetooth, a dane zostają na komputerze." },
 ];
 
