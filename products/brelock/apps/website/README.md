@@ -51,5 +51,12 @@ powinien być widoczny krok `@netlify/plugin-nextjs`. Konfiguracja ustawia też
 `NETLIFY_NEXT_PLUGIN_SKIP=false`, aby istniejące ustawienie pomijania adaptera
 nie wyłączało go przy ponownym wdrożeniu.
 
+Produkcja śledzi gałąź `main`. Po wysłaniu zmian strony na GitHub Netlify
+buduje ją i publikuje pod `https://brelock.pl`. Po wdrożeniu sprawdź `/`,
+`/pobierz` i obrazy w `/screenshots/` — powinny zwracać HTTP 200. Jeśli chcesz
+ponowić wdrożenie bez zmian w repozytorium, użyj w panelu Netlify
+**Deploys → Trigger deploy → Deploy site**. Pusty commit może zostać pominięty
+przez mechanizm wykrywania zmian w base directory.
+
 Więcej informacji: [Netlify — projekty w podkatalogach](https://docs.netlify.com/build/configure-builds/monorepos/)
 i [Next.js na Netlify](https://docs.netlify.com/build/frameworks/framework-setup-guides/nextjs/overview/).
