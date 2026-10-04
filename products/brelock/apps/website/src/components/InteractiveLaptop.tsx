@@ -25,7 +25,7 @@ export default function InteractiveLaptop() {
   return (
     <section id="demo" ref={sectionRef} className="demo-section" aria-labelledby="demo-title">
       <div className="demo-inner site-container">
-        <Reveal className="section-center"><p className="eyebrow">POBAW SIĘ POMYSŁEM</p><h2 id="demo-title" className="display-heading">Idziesz po kawę?<br /><em>Przesuń brelok.</em></h2><p className="demo-intro">Oddal go od komputera i zobacz docelową reakcję.</p></Reveal>
+        <Reveal className="section-center"><p className="eyebrow">POBAW SIĘ POMYSŁEM</p><h2 id="demo-title" className="display-heading">Idziesz po kawę?<br /><em>Przesuń brelok.</em></h2><p className="demo-intro">Oddal go od komputera i zobacz zasadę działania.</p></Reveal>
         <Reveal className="simulation-stage" delay={0.15}>
           <div className="simulation-illustration" aria-hidden="true">
             <div className="laptop-illustration">
@@ -57,7 +57,7 @@ export default function InteractiveLaptop() {
           <div className="range-heading"><label htmlFor="demo-distance">Odległość breloka</label><span role="status" aria-live="polite"><i className={isAway ? "is-away" : ""} />{isAway ? "Poza strefą" : "W zasięgu"}</span></div>
           <input id="demo-distance" className="distance-slider" type="range" min="0" max="100" step="1" value={distance} aria-label="Odległość breloka od komputera" aria-valuetext={isAway ? "Poza strefą, symulacja blokady ekranu" : "W zasięgu, komputer aktywny"} onChange={(event) => setDistance(Number(event.target.value))} />
           <div className="range-ends"><span>Przy komputerze</span><span>Poza strefą</span></div>
-          <p className="demo-disclaimer">To symulacja. Rzeczywista blokada systemu jest kolejnym etapem projektu.</p>
+          <p className="demo-disclaimer">To ilustracja zasady działania. Rzeczywistą ochronę zapewnia lokalna aplikacja połączona z fizycznym brelokiem.</p>
         </Reveal>
       </div>
     </section>

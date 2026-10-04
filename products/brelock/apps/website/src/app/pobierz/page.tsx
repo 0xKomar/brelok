@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { Reveal } from "@/components/MotionPrimitives";
+import { DesktopAppWalkthrough } from "@/components/DesktopAppShowcase";
 
 const downloads = [
   { name: "Windows", format: "Instalator .exe", href: "/breLock_Setup.exe" },
@@ -19,7 +20,7 @@ export default function DownloadPage() {
           <Reveal>
           <p className="eyebrow">BRELOCK&nbsp; / &nbsp;POC</p>
           <h1 id="download-title">Zobacz, nad czym<br /><span>pracujemy.</span></h1>
-          <p>Wybierz pakiet dla swojego komputera. breLock jest na etapie prototypu; integracja z blokadą systemu jest w planie.</p>
+          <p>Wybierz pakiet dla swojego komputera i zobacz aktualne widoki aplikacji poniżej. breLock to prototyp sprzętowy — testowanie ochrony wymaga fizycznego breloka.</p>
           </Reveal>
         </section>
         <div className="download-list" aria-label="Pakiety breLock">
@@ -33,6 +34,7 @@ export default function DownloadPage() {
           ))}
         </div>
         <p className="platform-note">Linux <span>—</span> pakiet jeszcze niedostępny</p>
+        <DesktopAppWalkthrough />
       </main>
       <SiteFooter />
     </>

@@ -180,6 +180,42 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .range-ends { display: flex; justify-content: space-between; color: #769084; font-size: 9px; }
 .demo-disclaimer { max-width: 440px; margin: 24px auto 0; color: #749084; font-size: 10px; line-height: 1.7; text-align: center; }
 
+/* Screenshots from the native desktop app */
+.app-preview-section { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 70px; padding-block: 125px 65px; }
+.app-preview-copy .display-heading { font-size: clamp(43px, 4.8vw, 62px); letter-spacing: -2.4px; }
+.app-preview-copy > p:not(.eyebrow) { max-width: 350px; margin-top: 25px; color: #66756e; font-size: 13px; line-height: 1.9; }
+.app-preview-copy > .quiet-link { margin-top: 28px; }
+.app-capture-note { display: block; margin-top: 19px; color: #809087; font-size: 9px; line-height: 1.7; }
+.app-preview-images { position: relative; height: 500px; }
+.app-preview-window { position: absolute; display: block; width: min(290px, 57%); border-radius: 14px; box-shadow: 0 18px 45px #0c152529; transition: transform .25s; }
+.app-preview-window:hover { transform: translateY(-6px); }
+.app-preview-window img { display: block; width: 100%; height: auto; border-radius: inherit; }
+.app-preview-setup { top: 0; right: 0; }
+.app-preview-status { z-index: 1; top: 85px; left: 0; }
+.app-walkthrough { margin-top: 115px; padding-top: 70px; border-top: 1px solid #d3dcd7; }
+.app-walkthrough-intro { max-width: 680px; margin-inline: auto; text-align: center; }
+.app-walkthrough-intro .display-heading { font-size: clamp(43px, 5vw, 62px); letter-spacing: -2.4px; }
+.app-walkthrough-intro > p:last-child { max-width: 450px; margin: 24px auto 0; color: #6a7a70; font-size: 13px; line-height: 1.9; }
+.app-walkthrough-steps { margin-top: 65px; }
+.app-walkthrough-step { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 90px; padding-block: 40px; }
+.app-walkthrough-step + .app-walkthrough-step { margin-top: 24px; }
+.app-step-image { padding: 34px 28px 28px; border-radius: 28px; background: #e7edf3; }
+.app-step-image figure { width: min(340px, 100%); margin-inline: auto; text-align: center; }
+.app-screenshot-link { display: block; }
+.app-screenshot-link img { display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 14px 34px #0c152521; }
+.app-screenshot-zoom { display: inline-flex; align-items: center; gap: 5px; margin-top: 19px; color: #4d655a; font-size: 10px; }
+.app-screenshot-link:hover .app-screenshot-zoom { color: #1a6a51; text-decoration: underline; text-underline-offset: 4px; }
+.app-step-image figcaption { margin-top: 10px; color: #7b8990; font-size: 9px; line-height: 1.7; }
+.app-walkthrough-step:nth-child(even) .app-step-image { grid-column: 2; grid-row: 1; }
+.app-walkthrough-step:nth-child(even) .app-step-copy { grid-column: 1; grid-row: 1; }
+.app-step-number { display: block; margin-bottom: 28px; color: #1a5a42; font-size: 24px; font-variant-numeric: tabular-nums; font-weight: 400; letter-spacing: -.8px; }
+.app-step-number > span { padding-inline: 5px; color: #a0afa6; }
+.app-step-copy > .eyebrow { display: flex; align-items: center; gap: 8px; }
+.app-step-copy h3 { max-width: 390px; margin-top: 18px; font-family: var(--serif); font-size: clamp(32px, 3.4vw, 44px); font-weight: 400; letter-spacing: -1.2px; line-height: 1.2; }
+.app-step-copy > p:not(.eyebrow) { max-width: 390px; margin-top: 24px; color: #66756e; font-size: 13px; line-height: 1.9; }
+.app-step-copy > p.app-step-detail { margin-top: 19px; padding-top: 18px; border-top: 1px solid #d3dcd7; color: #7d8c83; font-size: 11px; }
+.app-walkthrough-note { max-width: 600px; margin: 38px auto 0; color: #829087; font-size: 10px; line-height: 1.9; text-align: center; }
+
 /* The words themselves react to the scroll */
 .local-section { padding-block: 135px 120px; text-align: center; }
 .local-heading { margin-top: 32px; font-family: var(--serif); font-size: clamp(58px, 8vw, 108px); font-weight: 400; line-height: 1.15; letter-spacing: -5px; }
@@ -236,6 +272,10 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   .questions-section { gap: 45px; }
   .questions-section .display-heading { font-size: 45px; }
   .calibration-scene > p, .departure-scene > p { font-size: 24px; }
+  .app-preview-section { gap: 35px; }
+  .app-preview-images { height: 420px; }
+  .app-walkthrough-step { gap: 40px; }
+  .app-step-image { padding-inline: 20px; }
 }
 @media (max-width: 680px) {
   html { scroll-padding-top: 100px; }
@@ -316,6 +356,26 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   .signal-ripples > span { top: -80px; left: -80px; width: 160px; height: 160px; }
   .range-heading { font-size: 10px; }
   .demo-disclaimer { max-width: 290px; font-size: 9px; }
+  .app-preview-section { grid-template-columns: 1fr; gap: 36px; padding-block: 75px 25px; }
+  .app-preview-copy .display-heading { font-size: 45px; letter-spacing: -1.8px; }
+  .app-preview-copy > p:not(.eyebrow) { max-width: 400px; margin-top: 20px; font-size: 12px; }
+  .app-preview-copy > .quiet-link { margin-top: 22px; }
+  .app-preview-images { width: min(430px, 100%); height: auto; aspect-ratio: 1.06; margin-inline: auto; }
+  .app-preview-window { width: 57%; border-radius: 10px; }
+  .app-preview-status { top: 15%; }
+  .app-walkthrough { margin-top: 75px; padding-top: 55px; }
+  .app-walkthrough-intro .display-heading { font-size: clamp(36px, 8.8vw, 48px); letter-spacing: -1.5px; }
+  .app-walkthrough-intro > p:last-child { margin-top: 20px; font-size: 12px; }
+  .app-walkthrough-steps { margin-top: 42px; }
+  .app-walkthrough-step { grid-template-columns: 1fr; gap: 28px; padding-block: 22px; }
+  .app-walkthrough-step + .app-walkthrough-step { margin-top: 35px; }
+  .app-step-copy, .app-walkthrough-step:nth-child(even) .app-step-copy { grid-column: 1; grid-row: 1; }
+  .app-step-image, .app-walkthrough-step:nth-child(even) .app-step-image { grid-column: 1; grid-row: 2; padding: 24px 24px 20px; border-radius: 20px; }
+  .app-step-number { margin-bottom: 20px; font-size: 20px; }
+  .app-step-copy h3 { max-width: 400px; margin-top: 14px; font-size: 34px; letter-spacing: -.9px; }
+  .app-step-copy > p:not(.eyebrow) { max-width: 420px; margin-top: 18px; font-size: 12px; }
+  .app-step-copy > p.app-step-detail { margin-top: 16px; padding-top: 15px; font-size: 10px; }
+  .app-walkthrough-note { margin-top: 32px; font-size: 9px; }
   .local-section { padding-block: 88px 79px; }
   .local-heading { margin-top: 24px; font-size: clamp(46px, 10.5vw, 66px); letter-spacing: -2.5px; line-height: 1.2; }
   .local-description { max-width: 330px; font-size: 12px; }

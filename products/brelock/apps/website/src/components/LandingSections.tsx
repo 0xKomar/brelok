@@ -11,7 +11,7 @@ export { default as LandingHero } from "./HeroLaptop";
 const chapters = [
   { title: "Połącz brelok.", description: "Jeden brelok Bluetooth, jedna lokalna aplikacja. Wszystko zaczyna się od prostego połączenia." },
   { title: "Znajdź swoją strefę.", description: "Sygnał Bluetooth i informacja o ruchu pomagają rozpoznać, czy jesteś jeszcze przy biurku." },
-  { title: "Po prostu odejdź.", description: "Docelowo odejście z brelokiem uruchomi blokadę sesji. Wracasz i logujesz się tak, jak zawsze." },
+  { title: "Po prostu odejdź.", description: "Przy włączonej ochronie wykrycie odejścia uruchamia żądanie blokady sesji. Wracasz i logujesz się tak, jak zawsze." },
 ];
 
 function ChapterScene({ chapter }: { chapter: number }) {
@@ -30,11 +30,11 @@ function ChapterScene({ chapter }: { chapter: number }) {
     </div>
   );
   return (
-    <div className="departure-scene" aria-label="Ilustracja docelowej blokady po odejściu z brelokiem">
+    <div className="departure-scene" aria-label="Ilustracja blokady po odejściu z brelokiem">
       <div className="departure-line" />
       <motion.div className="departure-laptop" initial={reduced ? false : { scale: 0.85, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}><Laptop size={110} strokeWidth={0.8} /><motion.span initial={reduced ? false : { opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: reduced ? 0 : 1, type: "spring" }}><LockKeyhole size={30} strokeWidth={1.4} /></motion.span></motion.div>
       <motion.div className="departure-key" initial={reduced ? false : { x: -110 }} animate={{ x: 75 }} transition={{ duration: 1.8, ease: gentleEase }}><KeyRound size={33} strokeWidth={1.4} /></motion.div>
-      <p>Ty idziesz dalej.<br /><em>Ekran ma zostać pod ochroną.</em></p>
+      <p>Ty idziesz dalej.<br /><em>Ochrona działa w tle.</em></p>
       <span className="scene-note">DOCELOWY SCENARIUSZ</span>
     </div>
   );
@@ -82,7 +82,7 @@ export function ProcessStory() {
               </motion.button>
             ))}
           </div>
-          <p className="process-note">Scenariusz prototypu. Integracja z blokadą systemu jest w rozwoju.</p>
+          <p className="process-note">Projekt sprzętowy w fazie PoC. Ochrona wymaga breloka, kalibracji i uprawnień systemowych.</p>
         </Reveal>
         <Reveal className="story-visual" delay={0.2}>
           <div id="story-panel" role="tabpanel" aria-labelledby={`story-tab-${active}`}>
@@ -117,7 +117,7 @@ export function LocalFirst() {
 }
 
 const questions = [
-  { question: "Czy breLock już blokuje komputer?", answer: "Jeszcze nie. Rozwijamy prototyp aplikacji i breloka. Rzeczywista blokada systemu jest kolejnym etapem; demo na tej stronie pokazuje docelowe zachowanie." },
+  { question: "Czy breLock już blokuje komputer?", answer: "Prototyp aplikacji obsługuje systemową blokadę po wykryciu odejścia z brelokiem. Ochronę uruchamiasz po wybraniu urządzenia, kalibracji i nadaniu uprawnień systemowych. Animacja na tej stronie ilustruje zasadę działania; rzeczywiste testy wymagają fizycznego sprzętu." },
   { question: "Na jakich systemach powstaje aplikacja?", answer: "Projekt rozwijamy dla macOS i Windows. Na stronie pobierania znajdziesz dostępne pakiety prototypu." },
   { question: "Czy potrzebuję konta lub internetu?", answer: "Do lokalnego działania nie potrzebujesz konta ani serwera. Brelok komunikuje się z aplikacją przez Bluetooth, a dane zostają na komputerze." },
 ];
