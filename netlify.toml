@@ -5,3 +5,8 @@
 
 [build.environment]
   NODE_VERSION = "24"
+  NETLIFY_NEXT_PLUGIN_SKIP = "false"
+
+# Run the Next.js adapter even when this existing site was detected as static.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

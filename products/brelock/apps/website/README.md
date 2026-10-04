@@ -40,9 +40,16 @@ Połącz repozytorium `0xKomar/brelok`, wybierz gałąź `main` i następujące 
 | Node.js | `24` |
 
 Główny [netlify.toml](../../../../netlify.toml) zapisuje base directory, polecenie
-budowania, publish directory i wersję Node. Netlify automatycznie obsługuje
-Next.js przez adapter OpenNext. Strona nie wymaga sekretów ani własnych
+budowania, publish directory i wersję Node. Konfiguracja jawnie uruchamia
+adapter Next.js / OpenNext, który przygotowuje routing, pliki publiczne oraz
+optymalizację obrazów. Sam katalog `.next` opublikowany jako zwykłe pliki nie
+jest gotową stroną HTML. Strona nie wymaga sekretów ani własnych
 zmiennych środowiskowych.
+
+Po zmianie konfiguracji wykonaj ponowny deploy z repozytorium. W logach buildu
+powinien być widoczny krok `@netlify/plugin-nextjs`. Konfiguracja ustawia też
+`NETLIFY_NEXT_PLUGIN_SKIP=false`, aby istniejące ustawienie pomijania adaptera
+nie wyłączało go przy ponownym wdrożeniu.
 
 Więcej informacji: [Netlify — projekty w podkatalogach](https://docs.netlify.com/build/configure-builds/monorepos/)
 i [Next.js na Netlify](https://docs.netlify.com/build/frameworks/framework-setup-guides/nextjs/overview/).
